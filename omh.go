@@ -9,6 +9,8 @@ import (
 	"path"
 )
 
+const omhGenericError = "omh: error:"
+
 func UpdateRepo(gitFolder string) error {
 	repo, err := git.PlainOpen(gitFolder)
 	if err != nil {
@@ -44,18 +46,21 @@ func UpdateFolder(folder string) {
 
 	homeFolder, err := os.UserHomeDir()
 	if err != nil {
-		panic(err)
+		fmt.Println(omhGenericError, err)
+		os.Exit(1)
 	}
 
 	omzFolder := path.Join(homeFolder, ".oh-my-zsh/custom", folder)
 
 	if _, err := os.Stat(omzFolder); errors.Is(err, os.ErrNotExist) {
-		panic(err)
+		fmt.Println(omhGenericError, err)
+		os.Exit(1)
 	}
 
 	entries, err := os.ReadDir(omzFolder)
 	if err != nil {
-		panic(err)
+		fmt.Println(omhGenericError, err)
+		os.Exit(1)
 	}
 
 	for _, e := range entries {
