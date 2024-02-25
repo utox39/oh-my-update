@@ -17,7 +17,7 @@ oh-my-update is an [Oh My Zsh](https://ohmyz.sh/) plugin and theme updater writt
 - [Oh My Zsh](https://ohmyz.sh/)
 
 ## Installation
-```console
+```bash
 # Clone the repo
 $ git clone git@github.com:utox39/oh-my-update.git
 
@@ -34,7 +34,7 @@ $ mv omh ~/bin
 ## Usage
 
 ### Update plugins and themes
-```console
+```bash
 $ omh
 ```
 
