@@ -9,7 +9,7 @@ import (
 	"path"
 )
 
-const omhGenericError = "omh: error:"
+const omhGenericError = "omu: error:"
 
 func UpdateRepo(gitFolder string) error {
 	repo, err := git.PlainOpen(gitFolder)
@@ -81,7 +81,7 @@ func HandleError(err error, pluginName string) {
 	if errors.Is(err, git.NoErrAlreadyUpToDate) {
 		fmt.Printf("%s is %s\n\n", pluginName, err)
 	} else {
-		fmt.Printf("omh: %s: %s\n\n", pluginName, err)
+		fmt.Printf("omu: %s: %s\n\n", pluginName, err)
 	}
 }
 
