@@ -5,11 +5,16 @@ import (
 	"errors"
 	"fmt"
 	"github.com/go-git/go-git/v5"
+	"log"
 	"os"
 	"path"
 )
 
-const omhGenericError = "omu: error:"
+// LogErr is a custom logger
+func LogErr(err error) {
+	logger := log.New(os.Stderr, "omu: ", 0)
+	logger.Fatalln(err)
+}
 
 func UpdateRepo(gitFolder string) error {
 	repo, err := git.PlainOpen(gitFolder)
@@ -41,26 +46,23 @@ func UpdateRepo(gitFolder string) error {
 	return nil
 }
 
-func UpdateFolder(folder string) {
+func UpdateFolder(folder string) error {
 	fmt.Printf("Updating %s...\n\n", folder)
 
 	homeFolder, err := os.UserHomeDir()
 	if err != nil {
-		fmt.Println(omhGenericError, err)
-		os.Exit(1)
+		return err
 	}
 
 	omzFolder := path.Join(homeFolder, ".oh-my-zsh/custom", folder)
 
 	if _, err := os.Stat(omzFolder); errors.Is(err, os.ErrNotExist) {
-		fmt.Println(omhGenericError, err)
-		os.Exit(1)
+		return err
 	}
 
 	entries, err := os.ReadDir(omzFolder)
 	if err != nil {
-		fmt.Println(omhGenericError, err)
-		os.Exit(1)
+		return err
 	}
 
 	for _, e := range entries {
@@ -68,24 +70,26 @@ func UpdateFolder(folder string) {
 			fmt.Println("Updating:", e.Name())
 			gitFolder := path.Join(omzFolder, e.Name())
 			if updateErr := UpdateRepo(gitFolder); updateErr != nil {
-				HandleError(updateErr, e.Name())
+				if errors.Is(updateErr, git.NoErrAlreadyUpToDate) {
+					fmt.Printf("%s is %s\n\n", e.Name(), updateErr)
+				} else {
+					return fmt.Errorf(fmt.Sprintf("%s: %v", e.Name(), updateErr))
+				}
 			} else {
 				fmt.Println(e.Name(), "updated successfully")
 				fmt.Println()
 			}
 		}
 	}
-}
 
-func HandleError(err error, pluginName string) {
-	if errors.Is(err, git.NoErrAlreadyUpToDate) {
-		fmt.Printf("%s is %s\n\n", pluginName, err)
-	} else {
-		fmt.Printf("omu: %s: %s\n\n", pluginName, err)
-	}
+	return nil
 }
 
 func main() {
-	UpdateFolder("plugins")
-	UpdateFolder("themes")
+	if err := UpdateFolder("plugins"); err != nil {
+		LogErr(err)
+	}
+	if err := UpdateFolder("themes"); err != nil {
+		LogErr(err)
+	}
 }
