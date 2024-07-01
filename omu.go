@@ -72,13 +72,13 @@ func UpdateFolder(folder string) error {
 			if updateErr := UpdateRepo(gitFolder); updateErr != nil {
 				if errors.Is(updateErr, git.NoErrAlreadyUpToDate) {
 					fmt.Printf("%s is %s\n\n", e.Name(), updateErr)
+					continue
 				} else {
 					return fmt.Errorf(fmt.Sprintf("%s: %v", e.Name(), updateErr))
 				}
-			} else {
-				fmt.Println(e.Name(), "updated successfully")
-				fmt.Println()
 			}
+
+			fmt.Printf(e.Name(), "updated successfully\n")
 		}
 	}
 
