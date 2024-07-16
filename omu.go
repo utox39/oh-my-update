@@ -28,19 +28,17 @@ func UpdateRepo(gitFolder string) error {
 	}
 
 	var output bytes.Buffer
-	err = worktree.Pull(&git.PullOptions{
+	if err = worktree.Pull(&git.PullOptions{
 		RemoteName:    "origin",
 		ReferenceName: "refs/heads/master",
 		SingleBranch:  true,
 		Progress:      &output,
-	})
+	}); err != nil {
+		return err
+	}
 
 	if output.String() != "" {
 		fmt.Println(output.String())
-	}
-
-	if err != nil {
-		return err
 	}
 
 	return nil
