@@ -25,7 +25,7 @@ $ git clone git@github.com:utox39/oh-my-update.git
 $ cd path/to/oh-my-update
 
 # Build oh-my-update
-$ go build ohu.go
+$ go build omu.go
 
 # Then move it somewhere in your $PATH. Here is an example:
 $ mv omu ~/bin
