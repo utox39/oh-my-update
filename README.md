@@ -17,6 +17,14 @@ oh-my-update is an [Oh My Zsh](https://ohmyz.sh/) plugin and theme updater writt
 - [Oh My Zsh](https://ohmyz.sh/)
 
 ## Installation
+
+### Arch Linux
+[omu](https://aur.archlinux.org/packages/omu) is available as a package in the AUR. You can install it using your preferred AUR helper (e.g. `paru`):
+```bash
+$ paru -S omu
+```
+
+### Compiling from source
 ```bash
 # Clone the repo
 $ git clone git@github.com:utox39/oh-my-update.git
