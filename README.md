@@ -23,6 +23,7 @@ oh-my-update is an [Oh My Zsh](https://ohmyz.sh/) plugin and theme updater writt
 ```bash
 $ paru -S omu
 ```
+Special thanks to: @adamperkowski 
 
 ### Compiling from source
 ```bash
