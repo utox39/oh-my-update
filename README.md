@@ -1,6 +1,7 @@
 # oh-my-update
 
->⚠️: This project is under active development
+> [!WARNING]
+> This project is in maintenance mode; no new features are planned
 
 - [Description](#description)
 - [Requirements](#requirements)
@@ -13,19 +14,24 @@
 oh-my-update is an [Oh My Zsh](https://ohmyz.sh/) plugin and theme updater written in Go
 
 ## Requirements
+
 - [Go](https://go.dev/)
 - [Oh My Zsh](https://ohmyz.sh/)
 
 ## Installation
 
 ### Arch Linux
+
 [omu](https://aur.archlinux.org/packages/omu) is available as a package in the AUR. You can install it using your preferred AUR helper (e.g. `paru`):
+
 ```bash
-$ paru -S omu
+paru -S omu
 ```
-Special thanks to: @adamperkowski 
+
+Special thanks to: @adamperkowski
 
 ### Compiling from source
+
 ```bash
 # Clone the repo
 $ git clone git@github.com:utox39/oh-my-update.git
@@ -43,10 +49,12 @@ $ mv omu ~/bin
 ## Usage
 
 ### Update plugins and themes
+
 ```bash
-$ omu
+omu
 ```
 
 ## Contributing
+
 If you would like to contribute to this project just create a pull request which I will try to review as soon as
 possible.
