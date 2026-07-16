@@ -1,7 +1,7 @@
 # oh-my-update
 
 > [!WARNING]
-> This project is in maintenance mode; no new features are planned
+> This project has been archived.
 
 - [Description](#description)
 - [Requirements](#requirements)
